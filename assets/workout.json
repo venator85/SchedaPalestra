@@ -1,0 +1,142 @@
+[
+  {
+    "session": {
+      "name": "Giorno A",
+      "exercises": [
+        {
+          "name": "Panca piana",
+          "id": "panca-piana",
+          "with_barbell": true,
+          "sets": [
+            {
+              "reps": 8,
+              "1rmpc": 0.7
+            },
+            {
+              "reps": 4,
+              "1rmpc": 0.85
+            },
+            {
+              "reps": 6,
+              "1rmpc": 0.75
+            },
+            {
+              "reps": 12,
+              "1rmpc": 0.65
+            },
+            {
+              "reps": 10,
+              "1rmpc": 0.65
+            }
+          ]
+        },
+        {
+          "name": "Tricipiti French EZ",
+          "id": "french-ez",
+          "with_barbell": true,
+          "sets": [
+            {
+              "reps": 10,
+              "1rmpc": 0.7
+            },
+            {
+              "reps": 6,
+              "1rmpc": 0.8
+            },
+            {
+              "reps": 12,
+              "1rmpc": 0.65
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "session": {
+      "name": "Giorno B",
+      "exercises": [
+        {
+          "name": "Leg Press",
+          "id": "leg-press",
+          "with_barbell": false,
+          "sets": [
+            {
+              "reps": 10,
+              "1rmpc": 0.65
+            },
+            {
+              "reps": 6,
+              "1rmpc": 0.8
+            },
+            {
+              "reps": 8,
+              "1rmpc": 0.7
+            },
+            {
+              "reps": 12,
+              "1rmpc": 0.65
+            },
+            {
+              "reps": 14,
+              "1rmpc": 0.55
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "session": {
+      "name": "Giorno C",
+      "exercises": [
+        {
+          "name": "Rowing",
+          "id": "rowing",
+          "with_barbell": true,
+          "sets": [
+            {
+              "reps": 8,
+              "1rmpc": 0.7
+            },
+            {
+              "reps": 4,
+              "1rmpc": 0.85
+            },
+            {
+              "reps": 6,
+              "1rmpc": 0.75
+            },
+            {
+              "reps": 12,
+              "1rmpc": 0.65
+            },
+            {
+              "reps": 10,
+              "1rmpc": 0.65
+            }
+          ]
+        },
+        {
+          "name": "Bicipiti panca inclinata 45° in rotazione",
+          "id": "bicipiti-panca",
+          "with_barbell": false,
+          "sets": [
+            {
+              "reps": 10,
+              "1rmpc": 0.7
+            },
+            {
+              "reps": 6,
+              "1rmpc": 0.8
+            },
+            {
+              "reps": 12,
+              "1rmpc": 0.65
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
