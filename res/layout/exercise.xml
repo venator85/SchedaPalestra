@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/gs.or.venator.schedapalestra"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_marginBottom="10dp"
 	android:orientation="vertical" >
 
-	<TextView
+	<gs.or.venator.schedapalestra.RobotoTextView
 		android:id="@+id/exercise_name"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="Medium Text"
-		android:textAppearance="?android:attr/textAppearanceMedium" />
+		android:textSize="20sp"
+		app:typeface="roboto_condensed_regular" />
 
 	<LinearLayout
 		android:id="@+id/sets_container"
@@ -24,11 +26,12 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content" >
 
-			<TextView
+			<gs.or.venator.schedapalestra.RobotoTextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginRight="10dp"
-				android:text="Massimale:" />
+				android:text="Massimale:"
+				app:typeface="roboto_condensed_regular" />
 
 			<EditText
 				android:id="@+id/txt_1rm"
@@ -44,11 +47,12 @@
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="8dp" >
 
-			<TextView
+			<gs.or.venator.schedapalestra.RobotoTextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginRight="10dp"
-				android:text="Peso del bilanciere:" />
+				android:text="Peso del bilanciere:"
+				app:typeface="roboto_condensed_regular" />
 
 			<EditText
 				android:id="@+id/txt_barbell_weight"

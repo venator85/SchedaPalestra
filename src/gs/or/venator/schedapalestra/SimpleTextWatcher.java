@@ -3,7 +3,7 @@ package gs.or.venator.schedapalestra;
 import android.text.Editable;
 import android.text.TextWatcher;
 
-public class VenatorTextWatcher implements TextWatcher {
+public class SimpleTextWatcher implements TextWatcher {
 	private String last;
 
 	@Override

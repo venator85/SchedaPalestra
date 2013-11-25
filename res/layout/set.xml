@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/gs.or.venator.schedapalestra"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:gravity="center_vertical" >
 
-	<TextView
+	<gs.or.venator.schedapalestra.RobotoTextView
 		android:id="@+id/txt_set_reps"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="8"
-		android:textStyle="bold" />
+		android:textStyle="bold"
+		app:typeface="roboto_bold" />
 
-	<TextView
+	<gs.or.venator.schedapalestra.RobotoTextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="10dp"
 		android:layout_marginRight="10dp"
-		android:text="\@" />
+		android:text="\@"
+		app:typeface="roboto_light" />
 
-	<TextView
+	<gs.or.venator.schedapalestra.RobotoTextView
 		android:id="@+id/txt_set_1rmpc"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="60%" />
+		android:text="60%"
+		app:typeface="roboto_regular" />
 
 	<View
 		android:layout_width="0dp"
@@ -32,11 +36,12 @@
 		android:layout_weight="1"
 		android:background="#ffcccccc" />
 
-	<TextView
+	<gs.or.venator.schedapalestra.RobotoTextView
 		android:id="@+id/txt_set_weight"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="46.5 Kg"
-		android:textStyle="bold" />
+		android:textStyle="bold"
+		app:typeface="roboto_bold" />
 
 </LinearLayout>

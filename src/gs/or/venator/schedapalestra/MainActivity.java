@@ -33,7 +33,9 @@ public class MainActivity extends Activity {
 
 	private Map<String, List<Calculation>> exerciseIdToWeight = new HashMap<String, List<Calculation>>();
 
-	private class Calculation {
+	private LinearLayout sessionsLayout;
+
+	public class Calculation {
 		private TextView oneRmTextView;
 		private double oneRmPercent;
 		private TextView barbellWeightTextView;
@@ -80,8 +82,12 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		LinearLayout sessionsLayout = (LinearLayout) findViewById(R.id.sessions);
+		sessionsLayout = (LinearLayout) findViewById(R.id.sessions);
+		populate();
+	}
+	
+	private void populate() {
+		sessionsLayout.removeAllViews();
 
 		File workoutJsonFile = new File(Environment.getExternalStorageDirectory(), WORKOUT_JSON);
 		ensureWorkoutFileExistsOnSd(workoutJsonFile);
@@ -126,7 +132,7 @@ public class MainActivity extends Activity {
 					if (withBarbell) {
 						with_barbell_container.setVisibility(View.VISIBLE);
 						txt_barbell_weight = findView(with_barbell_container, R.id.txt_barbell_weight);
-						txt_barbell_weight.addTextChangedListener(new VenatorTextWatcher() {
+						txt_barbell_weight.addTextChangedListener(new SimpleTextWatcher() {
 							@Override
 							public void afterTextChanged_(Editable s) {
 								updateCalculations(exerciseId);
@@ -138,7 +144,7 @@ public class MainActivity extends Activity {
 					}
 
 					TextView txt_1rm = findView(exerciseView, R.id.txt_1rm);
-					txt_1rm.addTextChangedListener(new VenatorTextWatcher() {
+					txt_1rm.addTextChangedListener(new SimpleTextWatcher() {
 						@Override
 						public void afterTextChanged_(Editable s) {
 							updateCalculations(exerciseId);
