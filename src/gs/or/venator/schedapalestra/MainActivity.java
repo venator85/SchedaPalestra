@@ -3,10 +3,12 @@ package gs.or.venator.schedapalestra;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -21,6 +23,8 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -30,20 +34,26 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	private static final String WORKOUT_JSON = "workout.json";
+	private static final String WORKOUT_STATS_JSON = "workout_stats.json";
 
-	private Map<String, List<Calculation>> exerciseIdToWeight = new HashMap<String, List<Calculation>>();
+	private Map<String, List<SetCalculation>> exerciseIdToWeight;
+	private Map<String, ExerciseStat> exerciseStats;
 
 	private LinearLayout sessionsLayout;
+	private File workoutJsonFile;
+	private File workoutJsonStatsFile;
 
-	public class Calculation {
+	public class SetCalculation {
 		private TextView oneRmTextView;
 		private double oneRmPercent;
 		private TextView barbellWeightTextView;
 		private TextView resultTextView;
+		private boolean splitWeight;
 
-		public Calculation(TextView oneRmTextView, double oneRmPercent, TextView barbellWeightTextView, TextView resultTextView) {
+		public SetCalculation(TextView oneRmTextView, double oneRmPercent, boolean splitWeight, TextView barbellWeightTextView, TextView resultTextView) {
 			this.oneRmTextView = oneRmTextView;
 			this.oneRmPercent = oneRmPercent;
+			this.splitWeight = splitWeight;
 			this.barbellWeightTextView = barbellWeightTextView;
 			this.resultTextView = resultTextView;
 		}
@@ -53,11 +63,13 @@ public class MainActivity extends Activity {
 				double oneRm = Double.parseDouble(oneRmTextView.getText().toString());
 				double result = oneRm * oneRmPercent;
 				double resultPerSide = result;
-				if (barbellWeightTextView != null) {
-					final String sBarbellWeight = barbellWeightTextView.getText().toString();
-					if (StringUtils.isNumeric(sBarbellWeight)) {
-						double barbellWeight = Double.parseDouble(sBarbellWeight);
-						resultPerSide -= barbellWeight;
+				if (barbellWeightTextView != null || splitWeight) {
+					if (barbellWeightTextView != null) {
+						final String sBarbellWeight = barbellWeightTextView.getText().toString();
+						if (StringUtils.isNumeric(sBarbellWeight)) {
+							double barbellWeight = Double.parseDouble(sBarbellWeight);
+							resultPerSide -= barbellWeight;
+						}
 					}
 					resultPerSide /= 2;
 					final String weightPerSide = Utils.formatWeight(resultPerSide, false);
@@ -85,19 +97,35 @@ public class MainActivity extends Activity {
 		sessionsLayout = (LinearLayout) findViewById(R.id.sessions);
 		populate();
 	}
-	
+
 	private void populate() {
 		sessionsLayout.removeAllViews();
+		exerciseIdToWeight = new HashMap<String, List<SetCalculation>>();
+		exerciseStats = new LinkedHashMap<String, ExerciseStat>();
 
-		File workoutJsonFile = new File(Environment.getExternalStorageDirectory(), WORKOUT_JSON);
+		workoutJsonFile = new File(Environment.getExternalStorageDirectory(), WORKOUT_JSON);
+		workoutJsonStatsFile = new File(Environment.getExternalStorageDirectory(), WORKOUT_STATS_JSON);
 		ensureWorkoutFileExistsOnSd(workoutJsonFile);
 		Log.i("Using workout.json at " + workoutJsonFile.getAbsolutePath(), this);
 
+		FileInputStream fisWorkout = null;
+		FileInputStream fisStats = null;
 		try {
-			FileInputStream fis = new FileInputStream(workoutJsonFile);
-			String sWorkoutJson = Utils.convertStreamToString(fis);
-
+			fisWorkout = new FileInputStream(workoutJsonFile);
+			String sWorkoutJson = Utils.convertStreamToString(fisWorkout);
 			JSONArray workout = new JSONArray(sWorkoutJson);
+
+			if (workoutJsonStatsFile.exists()) {
+				fisStats = new FileInputStream(workoutJsonStatsFile);
+				String sStatsJson = Utils.convertStreamToString(fisStats);
+				JSONArray stats = new JSONArray(sStatsJson);
+
+				for (int i = 0; i < stats.length(); i++) {
+					JSONObject stat = stats.getJSONObject(i);
+					ExerciseStat exerciseStat = new ExerciseStat(stat);
+					exerciseStats.put(exerciseStat.getId(), exerciseStat);
+				}
+			}
 
 			for (int i = 0; i < workout.length(); i++) {
 				ViewGroup sessionView = (ViewGroup) getLayoutInflater().inflate(R.layout.session, sessionsLayout, false);
@@ -114,7 +142,7 @@ public class MainActivity extends Activity {
 					JSONObject exercise = exercises.getJSONObject(j);
 
 					final String exerciseId = exercise.getString("id");
-					List<Calculation> weights = new ArrayList<Calculation>();
+					List<SetCalculation> weights = new ArrayList<SetCalculation>();
 					exerciseIdToWeight.put(exerciseId, weights);
 
 					ViewGroup exerciseView = (ViewGroup) getLayoutInflater().inflate(R.layout.exercise, sessionView, false);
@@ -126,7 +154,14 @@ public class MainActivity extends Activity {
 					TextView exercise_name = findView(exerciseView, R.id.exercise_name);
 					exercise_name.setText(exerciseName);
 
-					boolean withBarbell = exercise.getBoolean("with_barbell");
+					boolean plainWeight = exercise.optBoolean("plain_weight");
+					if (plainWeight) {
+						TextView label_massimale = findView(exerciseView, R.id.label_massimale);
+						label_massimale.setText("Carico:");
+					}
+
+					boolean withBarbell = exercise.optBoolean("with_barbell");
+					boolean splitWeight = exercise.optBoolean("split_weight");
 					final View with_barbell_container = findView(exerciseView, R.id.with_barbell_container);
 					TextView txt_barbell_weight;
 					if (withBarbell) {
@@ -164,35 +199,61 @@ public class MainActivity extends Activity {
 						JSONObject set = sets.getJSONObject(k);
 
 						int reps = set.getInt("reps");
-						double oneRmPc = set.getDouble("1rmpc");
-
 						txt_set_reps.setText(String.valueOf(reps));
-						txt_set_1rmpc.setText(Utils.formatPercentage(oneRmPc));
 
-						weights.add(new Calculation(txt_1rm, oneRmPc, txt_barbell_weight, txt_set_weight)); //FIXME barbell
+						double oneRmPc = set.optDouble("1rmpc");
+						if (Double.isNaN(oneRmPc)) {
+							oneRmPc = 1.0;
+							findView(setView, R.id.txt_set_at).setVisibility(View.GONE);
+							txt_set_1rmpc.setVisibility(View.GONE);
+						} else {
+							txt_set_1rmpc.setText(Utils.formatPercentage(oneRmPc));
+						}
+
+						weights.add(new SetCalculation(txt_1rm, oneRmPc, splitWeight, txt_barbell_weight, txt_set_weight));
+					}
+
+					ExerciseStat stat = exerciseStats.get(exerciseId);
+					if (stat != null) {
+						txt_1rm.setText(Utils.doubleToShortString(stat.getSavedOneRm()));
+						if (txt_barbell_weight != null) {
+							txt_barbell_weight.setText(Utils.doubleToShortString(stat.getSavedBarbellWeight()));
+						}
+						stat.setOneRmTextView(txt_1rm);
+						stat.setBarbellWeightTextView(txt_barbell_weight);
+					} else {
+						stat = new ExerciseStat(exerciseId, exerciseName);
+						stat.setOneRmTextView(txt_1rm);
+						stat.setBarbellWeightTextView(txt_barbell_weight);
+						stat.setPlainWeight(plainWeight);
+						stat.setSplitWeight(splitWeight);
+						exerciseStats.put(exerciseId, stat);
 					}
 
 					Log.i("Weights by exercise: " + exerciseId + " --> " + weights, this);
-
 				}
 			}
 
-			for (Entry<String, List<Calculation>> e : exerciseIdToWeight.entrySet()) {
-				for (Calculation c : e.getValue()) {
+			for (Entry<String, List<SetCalculation>> e : exerciseIdToWeight.entrySet()) {
+				for (SetCalculation c : e.getValue()) {
 					c.update();
 				}
 			}
 
 		} catch (Exception e) {
-			Log.e("Error on opening/reading workout.json file", e, this);
+			Toast.makeText(this, "Error on opening/reading workout.json file:\n" + e.toString(), Toast.LENGTH_LONG).show();
 			throw new RuntimeException(e.getMessage(), e);
+
+		} finally {
+			IOUtils.closeQuietly(fisWorkout);
+			IOUtils.closeQuietly(fisStats);
 		}
 	}
 
 	private void updateCalculations(String exerciseId) {
-		List<Calculation> list = exerciseIdToWeight.get(exerciseId);
+		List<SetCalculation> list = exerciseIdToWeight.get(exerciseId);
 		if (list != null) {
-			for (Calculation c : list) {
+			for (SetCalculation c : list) {
 				c.update();
 			}
 		}
@@ -220,6 +281,44 @@ public class MainActivity extends Activity {
 				IOUtils.closeQuietly(is);
 				IOUtils.closeQuietly(fos);
 			}
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.menu_save) {
+			saveStats();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	private void saveStats() {
+		FileWriter fosStats = null;
+		try {
+			JSONArray array = new JSONArray();
+			for (Entry<String, ExerciseStat> e : exerciseStats.entrySet()) {
+				JSONObject o = e.getValue().toJson();
+				array.put(o);
+			}
+			String sStats = array.toString();
+			Log.d("Saving stats:\n" + array.toString(2), this);
+
+			fosStats = new FileWriter(workoutJsonStatsFile);
+			fosStats.write(sStats);
+
+			Toast.makeText(this, "Massimali e carichi salvati.", Toast.LENGTH_SHORT).show();
+		} catch (Exception e) {
+			Toast.makeText(this, "Unable to save stats:\n" + e.toString(), Toast.LENGTH_LONG).show();
+			Log.e("Unable to save stats", e, this);
+		} finally {
+			IOUtils.closeQuietly(fosStats);
 		}
 	}
 }

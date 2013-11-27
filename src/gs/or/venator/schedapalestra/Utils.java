@@ -3,6 +3,8 @@ package gs.or.venator.schedapalestra;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Scanner;
 
 import android.text.Spannable;
@@ -42,6 +44,17 @@ public class Utils {
 	public static String convertStreamToString(InputStream is) {
 		Scanner s = new Scanner(is, "UTF-8").useDelimiter("\\A");
 		return s.hasNext() ? s.next() : "";
+	}
+
+	public static String doubleToShortString(Double d) {
+		if (d == null || Double.isNaN(d)) {
+			return "";
+		}
+		NumberFormat nf = NumberFormat.getInstance(Locale.US);
+		nf.setMaximumFractionDigits(2);
+		nf.setMinimumFractionDigits(0);
+		nf.setGroupingUsed(false);
+		return nf.format(d);
 	}
 
 }

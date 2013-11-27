@@ -27,6 +27,7 @@
 			android:layout_height="wrap_content" >
 
 			<gs.or.venator.schedapalestra.RobotoTextView
+				android:id="@+id/label_massimale"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginRight="10dp"
