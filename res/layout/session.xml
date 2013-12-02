@@ -12,7 +12,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="10dp"
 		android:text="Large Text"
-		android:textColor="#33b6ea"
+		android:textColor="@color/light_blue"
 		android:textSize="24sp"
 		app:typeface="roboto_condensed_bold" />
 

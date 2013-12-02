@@ -2,7 +2,8 @@
 <resources>
 
 	<string name="app_name">Scheda palestra</string>
-	<string name="action_settings">Settings</string>
-	<string name="hello_world">Hello world!</string>
+	<string name="calcolo_massimale">Calcolo massimale</string>
+	
+	<string name="too_many_reps">Il numero di ripetizioni deve essere minore o uguale a 20.</string>
 
 </resources>

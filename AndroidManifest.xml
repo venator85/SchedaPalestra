@@ -27,6 +27,11 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+		<activity
+			android:name="gs.or.venator.schedapalestra.OneRepMaxCalculationActivity"
+			android:label="@string/calcolo_massimale"
+			android:windowSoftInputMode="stateAlwaysHidden" >
+		</activity>
 	</application>
 
 </manifest>
