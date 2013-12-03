@@ -1,5 +1,7 @@
 package gs.or.venator.schedapalestra;
 
+import gs.or.venator.schedapalestra.MyPagerAdapter.Page;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,10 +14,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -30,6 +34,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
+
 public class MainActivity extends Activity {
 
 	private static final String WORKOUT_JSON = "workout.json";
@@ -42,6 +48,7 @@ public class MainActivity extends Activity {
 	private File workoutJsonStatsFile;
 
 	private ViewPager viewPager;
+	private PagerSlidingTabStrip view_pager_tabs;
 
 	public class SetCalculation {
 		private TextView oneRmTextView;
@@ -95,11 +102,12 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		viewPager = (ViewPager) findViewById(R.id.view_pager);
+		view_pager_tabs = (PagerSlidingTabStrip) findViewById(R.id.view_pager_tabs);
 		populate();
 	}
 
 	private void populate() {
-		List<View> pages = new ArrayList<View>();
+		List<Page> pages = new ArrayList<Page>();
 
 		exerciseIdToWeight = new HashMap<String, List<SetCalculation>>();
 		exerciseStats = new LinkedHashMap<String, ExerciseStat>();
@@ -130,7 +138,6 @@ public class MainActivity extends Activity {
 
 			for (int i = 0; i < workout.length(); i++) {
 				ViewGroup sessionPage = (ViewGroup) getLayoutInflater().inflate(R.layout.session, viewPager, false);
-				pages.add(sessionPage);
 
 				ViewGroup sessionView = (ViewGroup) sessionPage.findViewById(R.id.session);
 
@@ -139,6 +146,8 @@ public class MainActivity extends Activity {
 				String sessionName = session.getString("name");
 				TextView session_name = findView(sessionView, R.id.session_name);
 				session_name.setText(sessionName);
+
+				pages.add(new Page(sessionPage, sessionName));
 
 				JSONArray exercises = session.getJSONArray("exercises");
 				for (int j = 0; j < exercises.length(); j++) {
@@ -244,6 +253,7 @@ public class MainActivity extends Activity {
 			}
 
 			viewPager.setAdapter(new MyPagerAdapter(pages));
+			view_pager_tabs.setViewPager(viewPager);
 
 		} catch (Exception e) {
 			Toast.makeText(this, "Error on opening/reading workout.json file:\n" + e.toString(), Toast.LENGTH_LONG).show();

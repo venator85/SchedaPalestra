@@ -8,9 +8,20 @@ import android.view.ViewGroup;
 
 public class MyPagerAdapter extends PagerAdapter {
 
-	private final List<View> pages;
+	public static class Page {
+		public View page;
+		public String title;
 
-	public MyPagerAdapter(List<View> pages) {
+		public Page(View page, String title) {
+			super();
+			this.page = page;
+			this.title = title;
+		}
+	}
+
+	private final List<Page> pages;
+
+	public MyPagerAdapter(List<Page> pages) {
 		super();
 		this.pages = pages;
 	}
@@ -21,8 +32,14 @@ public class MyPagerAdapter extends PagerAdapter {
 	}
 
 	@Override
+	public CharSequence getPageTitle(int position) {
+		return pages.get(position).title;
+
+	}
+
+	@Override
 	public Object instantiateItem(View collection, int position) {
-		View page = pages.get(position);
+		View page = pages.get(position).page;
 		((ViewGroup) collection).addView(page, 0);
 		return page;
 	}

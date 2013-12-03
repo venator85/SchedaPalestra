@@ -2,5 +2,9 @@
 <resources>
 
 	<color name="light_blue">#ff33b6ea</color>
+	<color name="light_blue_backg">#4b33b6ea</color>
+	
+	<color name="yellow">#ff99cc00</color>
+	<color name="red">#ffff4444</color>
 
 </resources>

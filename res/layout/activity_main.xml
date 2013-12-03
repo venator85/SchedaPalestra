@@ -1,6 +1,20 @@
-<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/view_pager"
+	xmlns:app="http://schemas.android.com/apk/res/gs.or.venator.schedapalestra"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".MainActivity" />
+	android:orientation="vertical"
+	tools:context=".MainActivity" >
+
+	<com.astuetz.viewpager.extensions.PagerSlidingTabStrip
+		android:id="@+id/view_pager_tabs"
+		android:layout_width="match_parent"
+		android:layout_height="48dip"
+		app:indicatorColor="@color/light_blue" />
+
+	<android.support.v4.view.ViewPager
+		android:id="@+id/view_pager"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" />
+
+</LinearLayout>
