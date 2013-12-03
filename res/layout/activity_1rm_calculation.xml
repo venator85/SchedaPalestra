@@ -19,6 +19,35 @@
 
 		<EditText
 			android:id="@+id/txt_weight"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:inputType="numberDecimal" >
+		</EditText>
+
+		<gs.or.venator.schedapalestra.RobotoCheckBox
+			android:id="@+id/chk_times_two"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="10dp"
+			android:text="× 2"
+			app:typeface="roboto_condensed_regular" />
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="8dp" >
+
+		<gs.or.venator.schedapalestra.RobotoTextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="10dp"
+			android:text="Peso del bilanciere:"
+			app:typeface="roboto_condensed_regular" />
+
+		<EditText
+			android:id="@+id/txt_barbell_weight"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:inputType="numberDecimal" >
