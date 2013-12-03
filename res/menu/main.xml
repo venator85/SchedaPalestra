@@ -1,14 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-	
+
 	<item
 		android:id="@+id/menu_1rm"
+		android:icon="@drawable/ic_1rm"
 		android:showAsAction="always"
-		android:title="Massimale"/>
-
+		android:title="@string/calcolo_massimale"/>
+	
 	<item
 		android:id="@+id/menu_save"
 		android:icon="@drawable/ic_action_accept"
 		android:showAsAction="always"
-		android:title="Salva"/>
+		android:title="@string/save_stats"/>
 
 </menu>

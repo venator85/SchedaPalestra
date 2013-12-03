@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res/gs.or.venator.schedapalestra"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:layout_marginBottom="20dp"
-	android:orientation="vertical" >
+	android:layout_height="match_parent"
+	tools:context=".MainActivity" >
 
-	<gs.or.venator.schedapalestra.RobotoTextView
-		android:id="@+id/session_name"
+	<LinearLayout
+		android:id="@+id/session"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginBottom="10dp"
-		android:text="Large Text"
-		android:textColor="@color/light_blue"
-		android:textSize="24sp"
-		app:typeface="roboto_condensed_bold" />
+		android:orientation="vertical"
+		android:padding="10dp" >
 
-</LinearLayout>
+		<gs.or.venator.schedapalestra.RobotoTextView
+			android:id="@+id/session_name"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:text="Session name"
+			android:textColor="@color/light_blue"
+			android:textSize="26sp"
+			app:typeface="roboto_condensed_bold" />
+	</LinearLayout>
+
+</ScrollView>

@@ -12,23 +12,21 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,9 +38,10 @@ public class MainActivity extends Activity {
 	private Map<String, List<SetCalculation>> exerciseIdToWeight;
 	private Map<String, ExerciseStat> exerciseStats;
 
-	private LinearLayout sessionsLayout;
 	private File workoutJsonFile;
 	private File workoutJsonStatsFile;
+
+	private ViewPager viewPager;
 
 	public class SetCalculation {
 		private TextView oneRmTextView;
@@ -95,12 +94,13 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		sessionsLayout = (LinearLayout) findViewById(R.id.sessions);
+		viewPager = (ViewPager) findViewById(R.id.view_pager);
 		populate();
 	}
 
 	private void populate() {
-		sessionsLayout.removeAllViews();
+		List<View> pages = new ArrayList<View>();
+
 		exerciseIdToWeight = new HashMap<String, List<SetCalculation>>();
 		exerciseStats = new LinkedHashMap<String, ExerciseStat>();
 
@@ -129,8 +129,10 @@ public class MainActivity extends Activity {
 			}
 
 			for (int i = 0; i < workout.length(); i++) {
-				ViewGroup sessionView = (ViewGroup) getLayoutInflater().inflate(R.layout.session, sessionsLayout, false);
-				sessionsLayout.addView(sessionView);
+				ViewGroup sessionPage = (ViewGroup) getLayoutInflater().inflate(R.layout.session, viewPager, false);
+				pages.add(sessionPage);
+
+				ViewGroup sessionView = (ViewGroup) sessionPage.findViewById(R.id.session);
 
 				JSONObject session = workout.getJSONObject(i).getJSONObject("session");
 
@@ -241,6 +243,8 @@ public class MainActivity extends Activity {
 				}
 			}
 
+			viewPager.setAdapter(new MyPagerAdapter(pages));
+
 		} catch (Exception e) {
 			Toast.makeText(this, "Error on opening/reading workout.json file:\n" + e.toString(), Toast.LENGTH_LONG).show();
 			throw new RuntimeException(e.getMessage(), e);
@@ -267,7 +271,7 @@ public class MainActivity extends Activity {
 
 	private void ensureWorkoutFileExistsOnSd(File workoutJsonFile) {
 		if (!workoutJsonFile.exists()) {
-			Toast.makeText(this, "Inizializzo scheda da assets", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, R.string.inizializzo_scheda_da_assets, Toast.LENGTH_LONG).show();
 			InputStream is = null;
 			FileOutputStream fos = null;
 			try {
@@ -318,7 +322,8 @@ public class MainActivity extends Activity {
 			fosStats = new FileWriter(workoutJsonStatsFile);
 			fosStats.write(sStats);
 
-			Toast.makeText(this, "Massimali e carichi salvati.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.massimali_e_carichi_salvati, Toast.LENGTH_SHORT).show();
+			Utils.hideKeyboard(this);
 		} catch (Exception e) {
 			Toast.makeText(this, "Unable to save stats:\n" + e.toString(), Toast.LENGTH_LONG).show();
 			Log.e("Unable to save stats", e, this);

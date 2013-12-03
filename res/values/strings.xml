@@ -3,7 +3,9 @@
 
 	<string name="app_name">Scheda palestra</string>
 	<string name="calcolo_massimale">Calcolo massimale</string>
-	
+	<string name="save_stats">Salva</string>
 	<string name="too_many_reps">Il numero di ripetizioni deve essere minore o uguale a 20.</string>
+	<string name="massimali_e_carichi_salvati">Massimali e carichi salvati.</string>
+	<string name="inizializzo_scheda_da_assets">Inizializzo scheda da assets</string>
 
 </resources>

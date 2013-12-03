@@ -7,9 +7,12 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Scanner;
 
+import android.app.Activity;
+import android.content.Context;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.view.inputmethod.InputMethodManager;
 
 public class Utils {
 
@@ -55,6 +58,11 @@ public class Utils {
 		nf.setMinimumFractionDigits(0);
 		nf.setGroupingUsed(false);
 		return nf.format(d);
+	}
+
+	public static void hideKeyboard(Activity activity) {
+		InputMethodManager im = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+		im.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 	}
 
 }
