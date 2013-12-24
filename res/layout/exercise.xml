@@ -6,7 +6,7 @@
 	android:layout_marginBottom="10dp"
 	android:orientation="vertical" >
 
-	<gs.or.venator.schedapalestra.RobotoTextView
+	<gs.or.venator.schedapalestra.view.RobotoTextView
 		android:id="@+id/exercise_name"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content" >
 
-			<gs.or.venator.schedapalestra.RobotoTextView
+			<gs.or.venator.schedapalestra.view.RobotoTextView
 				android:id="@+id/label_massimale"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="8dp" >
 
-			<gs.or.venator.schedapalestra.RobotoTextView
+			<gs.or.venator.schedapalestra.view.RobotoTextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginRight="10dp"

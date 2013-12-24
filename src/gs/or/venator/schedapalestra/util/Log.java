@@ -1,4 +1,4 @@
-package gs.or.venator.schedapalestra;
+package gs.or.venator.schedapalestra.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;

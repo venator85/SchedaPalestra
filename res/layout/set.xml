@@ -1,51 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res/gs.or.venator.schedapalestra"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:gravity="center_vertical" >
+    xmlns:app="http://schemas.android.com/apk/res/gs.or.venator.schedapalestra"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical" >
 
-	<gs.or.venator.schedapalestra.RobotoTextView
-		android:id="@+id/txt_set_reps"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="8"
-		android:textSize="17sp"
-		android:textStyle="bold"
-		app:typeface="roboto_bold" />
+    <gs.or.venator.schedapalestra.view.RobotoTextView
+        android:id="@+id/txt_set_reps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_default_holo_light"
+        android:text="8"
+        app:min_width_ems="2"
+        android:gravity="center"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:typeface="roboto_bold" />
 
-	<gs.or.venator.schedapalestra.RobotoTextView
-		android:id="@+id/txt_set_at"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginLeft="10dp"
-		android:layout_marginRight="10dp"
-		android:text="\@"
-		app:typeface="roboto_light" />
+    <gs.or.venator.schedapalestra.view.RobotoTextView
+        android:id="@+id/txt_set_at"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="\@"
+        app:typeface="roboto_light" />
 
-	<gs.or.venator.schedapalestra.RobotoTextView
-		android:id="@+id/txt_set_1rmpc"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="60%"
-		android:textSize="17sp"
-		app:typeface="roboto_regular" />
+    <gs.or.venator.schedapalestra.view.RobotoTextView
+        android:id="@+id/txt_set_1rmpc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="60%"
+        android:textSize="17sp"
+        app:typeface="roboto_regular" />
 
-	<View
-		android:layout_width="0dp"
-		android:layout_height="1px"
-		android:layout_marginLeft="10dp"
-		android:layout_marginRight="10dp"
-		android:layout_weight="1"
-		android:background="#ffcccccc" />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:background="@color/light_grey" />
 
-	<gs.or.venator.schedapalestra.RobotoTextView
-		android:id="@+id/txt_set_weight"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="46.5 Kg"
-		android:textSize="17sp"
-		android:textStyle="bold"
-		app:typeface="roboto_bold" />
+    <gs.or.venator.schedapalestra.view.RobotoTextView
+        android:id="@+id/txt_set_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="46.5 Kg"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:typeface="roboto_bold" />
 
 </LinearLayout>

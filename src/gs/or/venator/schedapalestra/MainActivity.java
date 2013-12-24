@@ -1,6 +1,11 @@
 package gs.or.venator.schedapalestra;
 
-import gs.or.venator.schedapalestra.MyPagerAdapter.Page;
+import gs.or.venator.schedapalestra.OneRepMaxCalculationDialog.AlertDialogListener;
+import gs.or.venator.schedapalestra.util.Log;
+import gs.or.venator.schedapalestra.util.SimpleTextWatcher;
+import gs.or.venator.schedapalestra.util.Utils;
+import gs.or.venator.schedapalestra.view.ViewPagerAdapter;
+import gs.or.venator.schedapalestra.view.ViewPagerAdapter.Page;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,11 +21,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -30,13 +35,14 @@ import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements AlertDialogListener {
 
 	private static final String WORKOUT_JSON = "workout.json";
 	private static final String WORKOUT_STATS_JSON = "workout_stats.json";
@@ -49,53 +55,6 @@ public class MainActivity extends Activity {
 
 	private ViewPager viewPager;
 	private PagerSlidingTabStrip view_pager_tabs;
-
-	public class SetCalculation {
-		private TextView oneRmTextView;
-		private double oneRmPercent;
-		private TextView barbellWeightTextView;
-		private TextView resultTextView;
-		private boolean splitWeight;
-
-		public SetCalculation(TextView oneRmTextView, double oneRmPercent, boolean splitWeight, TextView barbellWeightTextView, TextView resultTextView) {
-			this.oneRmTextView = oneRmTextView;
-			this.oneRmPercent = oneRmPercent;
-			this.splitWeight = splitWeight;
-			this.barbellWeightTextView = barbellWeightTextView;
-			this.resultTextView = resultTextView;
-		}
-
-		public void update() {
-			try {
-				double oneRm = Double.parseDouble(oneRmTextView.getText().toString());
-				double result = oneRm * oneRmPercent;
-				double resultPerSide = result;
-				if (barbellWeightTextView != null || splitWeight) {
-					if (barbellWeightTextView != null) {
-						final String sBarbellWeight = barbellWeightTextView.getText().toString();
-						if (StringUtils.isNumeric(sBarbellWeight)) {
-							double barbellWeight = Double.parseDouble(sBarbellWeight);
-							resultPerSide -= barbellWeight;
-						}
-					}
-					resultPerSide /= 2;
-					final String weightPerSide = Utils.formatWeight(resultPerSide, false);
-					resultTextView.setText(String.format("%s (%s + %s)", Utils.formatWeight(result), weightPerSide, weightPerSide));
-				} else {
-					resultTextView.setText(Utils.formatWeight(result));
-				}
-			} catch (NumberFormatException e) {
-				resultTextView.setText("N/A");
-			}
-		}
-
-		@Override
-		public String toString() {
-			return "Calculation [oneRmTextView=" + oneRmTextView + ", oneRmPercent=" + oneRmPercent + ", barbellWeightTextView=" + barbellWeightTextView
-					+ ", resultTextView=" + resultTextView + "]";
-		}
-
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -162,7 +121,7 @@ public class MainActivity extends Activity {
 
 					ViewGroup sets_container = findView(exerciseView, R.id.sets_container);
 
-					String exerciseName = exercise.getString("name");
+					final String exerciseName = exercise.getString("name");
 					TextView exercise_name = findView(exerciseView, R.id.exercise_name);
 					exercise_name.setText(exerciseName);
 
@@ -172,10 +131,10 @@ public class MainActivity extends Activity {
 						label_massimale.setText("Carico:");
 					}
 
-					boolean withBarbell = exercise.optBoolean("with_barbell");
-					boolean splitWeight = exercise.optBoolean("split_weight");
+					final boolean withBarbell = exercise.optBoolean("with_barbell");
+					final boolean splitWeight = exercise.optBoolean("split_weight");
 					final View with_barbell_container = findView(exerciseView, R.id.with_barbell_container);
-					TextView txt_barbell_weight;
+					final TextView txt_barbell_weight;
 					if (withBarbell) {
 						with_barbell_container.setVisibility(View.VISIBLE);
 						txt_barbell_weight = findView(with_barbell_container, R.id.txt_barbell_weight);
@@ -204,23 +163,36 @@ public class MainActivity extends Activity {
 						ViewGroup setView = (ViewGroup) getLayoutInflater().inflate(R.layout.set, sets_container, false);
 						sets_container.addView(setView);
 
-						TextView txt_set_reps = findView(setView, R.id.txt_set_reps);
-						TextView txt_set_1rmpc = findView(setView, R.id.txt_set_1rmpc);
-						TextView txt_set_weight = findView(setView, R.id.txt_set_weight);
+						final TextView txt_set_reps = findView(setView, R.id.txt_set_reps);
+						final TextView txt_set_1rmpc = findView(setView, R.id.txt_set_1rmpc);
+						final TextView txt_set_weight = findView(setView, R.id.txt_set_weight);
 
 						JSONObject set = sets.getJSONObject(k);
 
 						int reps = set.getInt("reps");
 						txt_set_reps.setText(String.valueOf(reps));
 
-						double oneRmPc = set.optDouble("1rmpc");
-						if (Double.isNaN(oneRmPc)) {
-							oneRmPc = 1.0;
+						double oneRmPc_ = set.optDouble("1rmpc");
+						if (Double.isNaN(oneRmPc_)) {
+							oneRmPc_ = 1.0;
 							findView(setView, R.id.txt_set_at).setVisibility(View.GONE);
 							txt_set_1rmpc.setVisibility(View.GONE);
 						} else {
-							txt_set_1rmpc.setText(Utils.formatPercentage(oneRmPc));
+							txt_set_1rmpc.setText(Utils.formatPercentage(oneRmPc_));
 						}
+						final double oneRmPc = oneRmPc_;
+
+						txt_set_reps.setOnClickListener(new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								String weight = String.valueOf(txt_set_weight.getTag());
+								CharSequence barbellWeight = withBarbell ? txt_barbell_weight.getText() : null;
+								CharSequence sReps = txt_set_reps.getText();
+								boolean barbellOrSplit = withBarbell | splitWeight;
+								DialogFragment newFragment = OneRepMaxCalculationDialog.newInstance(exerciseName, sReps, weight, barbellOrSplit, barbellWeight);
+								newFragment.show(getFragmentManager(), exerciseName);
+							}
+						});
 
 						weights.add(new SetCalculation(txt_1rm, oneRmPc, splitWeight, txt_barbell_weight, txt_set_weight));
 					}
@@ -252,7 +224,7 @@ public class MainActivity extends Activity {
 				}
 			}
 
-			viewPager.setAdapter(new MyPagerAdapter(pages));
+			viewPager.setAdapter(new ViewPagerAdapter(pages));
 			view_pager_tabs.setViewPager(viewPager);
 
 		} catch (Exception e) {
@@ -340,5 +312,17 @@ public class MainActivity extends Activity {
 		} finally {
 			IOUtils.closeQuietly(fosStats);
 		}
+	}
+
+	@Override
+	public void onDialogPositiveClick(DialogFragment dialog) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onDialogNegativeClick(DialogFragment dialog) {
+		// TODO Auto-generated method stub
+
 	}
 }

@@ -1,4 +1,4 @@
-package gs.or.venator.schedapalestra;
+package gs.or.venator.schedapalestra.util;
 
 import android.text.Editable;
 import android.text.TextWatcher;

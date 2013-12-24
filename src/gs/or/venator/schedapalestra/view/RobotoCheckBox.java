@@ -1,5 +1,7 @@
-package gs.or.venator.schedapalestra;
+package gs.or.venator.schedapalestra.view;
 
+import gs.or.venator.schedapalestra.R;
+import gs.or.venator.schedapalestra.util.FontManager;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;

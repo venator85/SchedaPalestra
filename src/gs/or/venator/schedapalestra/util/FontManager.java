@@ -1,5 +1,6 @@
-package gs.or.venator.schedapalestra;
+package gs.or.venator.schedapalestra.util;
 
+import gs.or.venator.schedapalestra.SchedaPalestraApp;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 

@@ -1,11 +1,18 @@
-package gs.or.venator.schedapalestra;
+package gs.or.venator.schedapalestra.view;
 
+import gs.or.venator.schedapalestra.R;
+import gs.or.venator.schedapalestra.util.FontManager;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
 public class RobotoTextView extends TextView {
+
+	private static final String EM = "m";
+
+	private Float minEms;
 
 	public RobotoTextView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -26,11 +33,27 @@ public class RobotoTextView extends TextView {
 		if (!isInEditMode()) {
 			if (attrs != null) {
 				TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.RobotoTextView);
+
 				int typeface = a.getInt(R.styleable.RobotoTextView_typeface, 0);
-				setTypeface(FontManager.getInstance().getTypeface(typeface));
+				Typeface tf = FontManager.getInstance().getTypeface(typeface);
+				setTypeface(tf);
+
+				int minWidthEms = a.getInt(R.styleable.RobotoTextView_min_width_ems, -1);
+				if (minWidthEms != -1) {
+					minEms = getPaint().measureText(EM) * minWidthEms;
+				}
+
 				a.recycle();
 			}
 		}
+	}
+
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		if (minEms != null) {
+			setMinimumWidth((int) Math.ceil(getPaddingLeft() + minEms + getPaddingRight()));
+		}
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
 
 }

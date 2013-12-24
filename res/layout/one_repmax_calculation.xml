@@ -10,7 +10,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content" >
 
-		<gs.or.venator.schedapalestra.RobotoTextView
+		<gs.or.venator.schedapalestra.view.RobotoTextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginRight="10dp"
@@ -24,8 +24,8 @@
 			android:layout_weight="1"
 			android:inputType="numberDecimal" >
 		</EditText>
-
-		<gs.or.venator.schedapalestra.RobotoCheckBox
+		
+		<gs.or.venator.schedapalestra.view.RobotoCheckBox
 			android:id="@+id/chk_times_two"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="8dp" >
 
-		<gs.or.venator.schedapalestra.RobotoTextView
+		<gs.or.venator.schedapalestra.view.RobotoTextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginRight="10dp"
@@ -58,7 +58,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content" >
 
-		<gs.or.venator.schedapalestra.RobotoTextView
+		<gs.or.venator.schedapalestra.view.RobotoTextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginRight="10dp"
@@ -73,7 +73,7 @@
 		</EditText>
 	</LinearLayout>
 
-	<gs.or.venator.schedapalestra.RobotoTextView
+	<gs.or.venator.schedapalestra.view.RobotoTextView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="16dp"
@@ -82,7 +82,7 @@
 		android:textSize="20sp"
 		app:typeface="roboto_condensed_regular" />
 
-	<gs.or.venator.schedapalestra.RobotoTextView
+	<gs.or.venator.schedapalestra.view.RobotoTextView
 		android:id="@+id/txt_1rm"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package gs.or.venator.schedapalestra;
+package gs.or.venator.schedapalestra.view;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MyPagerAdapter extends PagerAdapter {
+public class ViewPagerAdapter extends PagerAdapter {
 
 	public static class Page {
 		public View page;
@@ -21,7 +21,7 @@ public class MyPagerAdapter extends PagerAdapter {
 
 	private final List<Page> pages;
 
-	public MyPagerAdapter(List<Page> pages) {
+	public ViewPagerAdapter(List<Page> pages) {
 		super();
 		this.pages = pages;
 	}

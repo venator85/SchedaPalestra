@@ -1,5 +1,7 @@
 package gs.or.venator.schedapalestra;
 
+import gs.or.venator.schedapalestra.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 

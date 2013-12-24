@@ -13,7 +13,7 @@
 		android:orientation="vertical"
 		android:padding="10dp" >
 
-		<gs.or.venator.schedapalestra.RobotoTextView
+		<gs.or.venator.schedapalestra.view.RobotoTextView
 			android:id="@+id/session_name"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"

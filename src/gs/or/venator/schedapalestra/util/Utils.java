@@ -1,4 +1,4 @@
-package gs.or.venator.schedapalestra;
+package gs.or.venator.schedapalestra.util;
 
 import java.io.InputStream;
 import java.text.DecimalFormat;
@@ -15,6 +15,12 @@ import android.text.style.ForegroundColorSpan;
 import android.view.inputmethod.InputMethodManager;
 
 public class Utils {
+
+	public static double roundToIncrement(double x, double increment) {
+		double y = x / increment;
+		double q = Math.round(y);
+		return q * increment;
+	}
 
 	public static String formatWeight(double weight) {
 		return formatWeight(weight, true);
