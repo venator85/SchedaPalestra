@@ -12,6 +12,7 @@ import android.content.Context;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 public class Utils {
@@ -69,6 +70,11 @@ public class Utils {
 	public static void hideKeyboard(Activity activity) {
 		InputMethodManager im = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
 		im.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T extends View> T findView(View root, int id) {
+		return (T) root.findViewById(id);
 	}
 
 }

@@ -1,6 +1,6 @@
 package gs.or.venator.schedapalestra;
 
-import gs.or.venator.schedapalestra.OneRepMaxCalculationDialog.AlertDialogListener;
+import gs.or.venator.schedapalestra.OneRepMaxCalculationDialog.OnNewOneRepMaxSet;
 import gs.or.venator.schedapalestra.util.Log;
 import gs.or.venator.schedapalestra.util.SimpleTextWatcher;
 import gs.or.venator.schedapalestra.util.Utils;
@@ -25,13 +25,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.app.DialogFragment;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.view.ViewPager;
-import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +41,7 @@ import android.widget.Toast;
 
 import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
 
-public class MainActivity extends Activity implements AlertDialogListener {
+public class MainActivity extends Activity {
 
 	private static final String WORKOUT_JSON = "workout.json";
 	private static final String WORKOUT_STATS_JSON = "workout_stats.json";
@@ -103,7 +102,7 @@ public class MainActivity extends Activity implements AlertDialogListener {
 				JSONObject session = workout.getJSONObject(i).getJSONObject("session");
 
 				String sessionName = session.getString("name");
-				TextView session_name = findView(sessionView, R.id.session_name);
+				TextView session_name = Utils.findView(sessionView, R.id.session_name);
 				session_name.setText(sessionName);
 
 				pages.add(new Page(sessionPage, sessionName));
@@ -119,28 +118,28 @@ public class MainActivity extends Activity implements AlertDialogListener {
 					ViewGroup exerciseView = (ViewGroup) getLayoutInflater().inflate(R.layout.exercise, sessionView, false);
 					sessionView.addView(exerciseView);
 
-					ViewGroup sets_container = findView(exerciseView, R.id.sets_container);
+					ViewGroup sets_container = Utils.findView(exerciseView, R.id.sets_container);
 
 					final String exerciseName = exercise.getString("name");
-					TextView exercise_name = findView(exerciseView, R.id.exercise_name);
+					TextView exercise_name = Utils.findView(exerciseView, R.id.exercise_name);
 					exercise_name.setText(exerciseName);
 
 					boolean plainWeight = exercise.optBoolean("plain_weight");
 					if (plainWeight) {
-						TextView label_massimale = findView(exerciseView, R.id.label_massimale);
+						TextView label_massimale = Utils.findView(exerciseView, R.id.label_massimale);
 						label_massimale.setText("Carico:");
 					}
 
 					final boolean withBarbell = exercise.optBoolean("with_barbell");
 					final boolean splitWeight = exercise.optBoolean("split_weight");
-					final View with_barbell_container = findView(exerciseView, R.id.with_barbell_container);
+					final View with_barbell_container = Utils.findView(exerciseView, R.id.with_barbell_container);
 					final TextView txt_barbell_weight;
 					if (withBarbell) {
 						with_barbell_container.setVisibility(View.VISIBLE);
-						txt_barbell_weight = findView(with_barbell_container, R.id.txt_barbell_weight);
+						txt_barbell_weight = Utils.findView(with_barbell_container, R.id.txt_barbell_weight);
 						txt_barbell_weight.addTextChangedListener(new SimpleTextWatcher() {
 							@Override
-							public void afterTextChanged_(Editable s) {
+							public void afterTextChanged_(String s) {
 								updateCalculations(exerciseId);
 							}
 						});
@@ -149,10 +148,10 @@ public class MainActivity extends Activity implements AlertDialogListener {
 						txt_barbell_weight = null;
 					}
 
-					TextView txt_1rm = findView(exerciseView, R.id.txt_1rm);
+					final TextView txt_1rm = Utils.findView(exerciseView, R.id.txt_1rm);
 					txt_1rm.addTextChangedListener(new SimpleTextWatcher() {
 						@Override
-						public void afterTextChanged_(Editable s) {
+						public void afterTextChanged_(String s) {
 							updateCalculations(exerciseId);
 						}
 					});
@@ -163,9 +162,9 @@ public class MainActivity extends Activity implements AlertDialogListener {
 						ViewGroup setView = (ViewGroup) getLayoutInflater().inflate(R.layout.set, sets_container, false);
 						sets_container.addView(setView);
 
-						final TextView txt_set_reps = findView(setView, R.id.txt_set_reps);
-						final TextView txt_set_1rmpc = findView(setView, R.id.txt_set_1rmpc);
-						final TextView txt_set_weight = findView(setView, R.id.txt_set_weight);
+						final TextView txt_set_reps = Utils.findView(setView, R.id.txt_set_reps);
+						final TextView txt_set_1rmpc = Utils.findView(setView, R.id.txt_set_1rmpc);
+						final TextView txt_set_weight = Utils.findView(setView, R.id.txt_set_weight);
 
 						JSONObject set = sets.getJSONObject(k);
 
@@ -175,7 +174,7 @@ public class MainActivity extends Activity implements AlertDialogListener {
 						double oneRmPc_ = set.optDouble("1rmpc");
 						if (Double.isNaN(oneRmPc_)) {
 							oneRmPc_ = 1.0;
-							findView(setView, R.id.txt_set_at).setVisibility(View.GONE);
+							Utils.findView(setView, R.id.txt_set_at).setVisibility(View.GONE);
 							txt_set_1rmpc.setVisibility(View.GONE);
 						} else {
 							txt_set_1rmpc.setText(Utils.formatPercentage(oneRmPc_));
@@ -189,8 +188,13 @@ public class MainActivity extends Activity implements AlertDialogListener {
 								CharSequence barbellWeight = withBarbell ? txt_barbell_weight.getText() : null;
 								CharSequence sReps = txt_set_reps.getText();
 								boolean barbellOrSplit = withBarbell | splitWeight;
-								DialogFragment newFragment = OneRepMaxCalculationDialog.newInstance(exerciseName, sReps, weight, barbellOrSplit, barbellWeight);
-								newFragment.show(getFragmentManager(), exerciseName);
+								AlertDialog dialog = OneRepMaxCalculationDialog.newInstance(MainActivity.this, exerciseName, sReps, weight, barbellOrSplit, barbellWeight, new OnNewOneRepMaxSet() {
+									@Override
+									public void onNewOneRepMaxSet(double newOneRepMax) {
+										txt_1rm.setText(Utils.doubleToShortString(newOneRepMax));
+									}
+								});
+								dialog.show();
 							}
 						});
 
@@ -244,11 +248,6 @@ public class MainActivity extends Activity implements AlertDialogListener {
 				c.update();
 			}
 		}
-	}
-
-	@SuppressWarnings("unchecked")
-	private <T extends View> T findView(View root, int id) {
-		return (T) root.findViewById(id);
 	}
 
 	private void ensureWorkoutFileExistsOnSd(File workoutJsonFile) {
@@ -314,15 +313,4 @@ public class MainActivity extends Activity implements AlertDialogListener {
 		}
 	}
 
-	@Override
-	public void onDialogPositiveClick(DialogFragment dialog) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onDialogNegativeClick(DialogFragment dialog) {
-		// TODO Auto-generated method stub
-
-	}
 }

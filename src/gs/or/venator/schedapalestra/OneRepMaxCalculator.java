@@ -3,7 +3,6 @@ package gs.or.venator.schedapalestra;
 import gs.or.venator.schedapalestra.util.SimpleTextWatcher;
 import gs.or.venator.schedapalestra.util.Utils;
 import android.content.Context;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -33,7 +32,7 @@ public class OneRepMaxCalculator {
 
 		SimpleTextWatcher textWatcher = new SimpleTextWatcher() {
 			@Override
-			public void afterTextChanged_(Editable s) {
+			public void afterTextChanged_(String s) {
 				calculateOneRepMax();
 			}
 		};
@@ -89,8 +88,18 @@ public class OneRepMaxCalculator {
 
 			double oneRepMax = repMax(weight, reps);
 			txt_1rm.setText(Utils.formatWeight(oneRepMax));
+			txt_1rm.setTag(oneRepMax);
 		} catch (NumberFormatException e) {
 			txt_1rm.setText("N/A");
+		}
+	}
+
+	public Double getOneRepMax() {
+		try {
+			double oneRepMax = (Double) txt_1rm.getTag();
+			return oneRepMax;
+		} catch (Exception e) {
+			return null;
 		}
 	}
 

@@ -1,95 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res/gs.or.venator.schedapalestra"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="vertical"
-	android:padding="10dp" >
+    xmlns:app="http://schemas.android.com/apk/res/gs.or.venator.schedapalestra"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
 
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-		<gs.or.venator.schedapalestra.view.RobotoTextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginRight="10dp"
-			android:text="Carico:"
-			app:typeface="roboto_condensed_regular" />
+        <gs.or.venator.schedapalestra.view.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Carico:"
+            app:typeface="roboto_condensed_regular" />
 
-		<EditText
-			android:id="@+id/txt_weight"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:inputType="numberDecimal" >
-		</EditText>
-		
-		<gs.or.venator.schedapalestra.view.RobotoCheckBox
-			android:id="@+id/chk_times_two"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginRight="10dp"
-			android:text="× 2"
-			app:typeface="roboto_condensed_regular" />
-	</LinearLayout>
+        <gs.or.venator.schedapalestra.view.RobotoEditText
+            android:id="@+id/txt_weight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
+            app:typeface="roboto_regular" />
 
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="8dp" >
+        <gs.or.venator.schedapalestra.view.RobotoCheckBox
+            android:id="@+id/chk_times_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="× 2"
+            app:typeface="roboto_condensed_regular" />
+    </LinearLayout>
 
-		<gs.or.venator.schedapalestra.view.RobotoTextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginRight="10dp"
-			android:text="Peso del bilanciere:"
-			app:typeface="roboto_condensed_regular" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp" >
 
-		<EditText
-			android:id="@+id/txt_barbell_weight"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:inputType="numberDecimal" >
-		</EditText>
-	</LinearLayout>
+        <gs.or.venator.schedapalestra.view.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Peso del bilanciere:"
+            app:typeface="roboto_condensed_regular" />
 
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content" >
+        <gs.or.venator.schedapalestra.view.RobotoEditText
+            android:id="@+id/txt_barbell_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            app:typeface="roboto_regular" />
+    </LinearLayout>
 
-		<gs.or.venator.schedapalestra.view.RobotoTextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginRight="10dp"
-			android:text="Ripetizioni:"
-			app:typeface="roboto_condensed_regular" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-		<EditText
-			android:id="@+id/txt_reps"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:inputType="number" >
-		</EditText>
-	</LinearLayout>
+        <gs.or.venator.schedapalestra.view.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Ripetizioni:"
+            app:typeface="roboto_condensed_regular" />
 
-	<gs.or.venator.schedapalestra.view.RobotoTextView
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="16dp"
-		android:gravity="center"
-		android:text="Massimale:"
-		android:textSize="20sp"
-		app:typeface="roboto_condensed_regular" />
+        <gs.or.venator.schedapalestra.view.RobotoEditText
+            android:id="@+id/txt_reps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            app:typeface="roboto_regular" />
+    </LinearLayout>
 
-	<gs.or.venator.schedapalestra.view.RobotoTextView
-		android:id="@+id/txt_1rm"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center"
-		android:text="70 Kg"
-		android:textColor="@color/light_blue"
-		android:textSize="40sp"
-		app:typeface="roboto_light" />
+    <gs.or.venator.schedapalestra.view.RobotoTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Massimale:"
+        android:textSize="20sp"
+        app:typeface="roboto_condensed_regular" />
+
+    <gs.or.venator.schedapalestra.view.RobotoTextView
+        android:id="@+id/txt_1rm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="70 Kg"
+        android:textColor="@color/light_blue"
+        android:textSize="40sp"
+        app:typeface="roboto_light" />
 
 </LinearLayout>
