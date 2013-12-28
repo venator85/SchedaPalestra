@@ -12,8 +12,6 @@ public class RobotoTextView extends TextView {
 
 	private static final String EM = "m";
 
-	private Float minEms;
-
 	public RobotoTextView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		onInit(attrs);
@@ -40,20 +38,13 @@ public class RobotoTextView extends TextView {
 
 				int minWidthEms = a.getInt(R.styleable.RobotoTextView_min_width_ems, -1);
 				if (minWidthEms != -1) {
-					minEms = getPaint().measureText(EM) * minWidthEms;
+					float minEms = getPaint().measureText(EM) * minWidthEms;
+					setMinimumWidth((int) Math.ceil(getPaddingLeft() + minEms + getPaddingRight()));
 				}
 
 				a.recycle();
 			}
 		}
-	}
-
-	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		if (minEms != null) {
-			setMinimumWidth((int) Math.ceil(getPaddingLeft() + minEms + getPaddingRight()));
-		}
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
 
 }
