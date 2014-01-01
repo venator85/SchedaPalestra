@@ -1,6 +1,8 @@
 package gs.or.venator.schedapalestra;
 
 import gs.or.venator.schedapalestra.OneRepMaxCalculationDialog.OnNewOneRepMaxSet;
+import gs.or.venator.schedapalestra.core.ExerciseStat;
+import gs.or.venator.schedapalestra.core.SetCalculation;
 import gs.or.venator.schedapalestra.util.Log;
 import gs.or.venator.schedapalestra.util.SimpleTextWatcher;
 import gs.or.venator.schedapalestra.util.Utils;
@@ -127,7 +129,7 @@ public class MainActivity extends Activity {
 					boolean plainWeight = exercise.optBoolean("plain_weight");
 					if (plainWeight) {
 						TextView label_massimale = Utils.findView(exerciseView, R.id.label_massimale);
-						label_massimale.setText("Carico:");
+						label_massimale.setText(R.string.label_onerepmax_when_plainweight);
 					}
 
 					final boolean withBarbell = exercise.optBoolean("with_barbell");

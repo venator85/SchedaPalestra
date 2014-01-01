@@ -6,6 +6,12 @@
     android:orientation="vertical"
     android:padding="10dp" >
 
+    <Spinner
+        android:id="@+id/one_rep_max_method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -14,13 +20,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:text="Carico:"
+            android:text="@string/label_onerepmax_when_plainweight"
             app:typeface="roboto_condensed_regular" />
 
         <gs.or.venator.schedapalestra.view.RobotoEditText
             android:id="@+id/txt_weight"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
             android:layout_weight="1"
             android:inputType="numberDecimal"
             app:typeface="roboto_regular" />
@@ -29,7 +36,6 @@
             android:id="@+id/chk_times_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
             android:text="× 2"
             app:typeface="roboto_condensed_regular" />
     </LinearLayout>
@@ -79,7 +85,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="Massimale:"
-        android:textSize="20sp"
+        android:textSize="17sp"
         app:typeface="roboto_condensed_regular" />
 
     <gs.or.venator.schedapalestra.view.RobotoTextView
@@ -91,5 +97,15 @@
         android:textColor="@color/light_blue"
         android:textSize="40sp"
         app:typeface="roboto_light" />
+
+    <gs.or.venator.schedapalestra.view.RobotoTextView
+        android:id="@+id/one_rep_max_method_extra_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/light_blue"
+        android:visibility="gone"
+        app:typeface="roboto_condensed_regular" />
 
 </LinearLayout>

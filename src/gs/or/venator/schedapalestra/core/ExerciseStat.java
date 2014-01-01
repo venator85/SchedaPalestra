@@ -1,4 +1,4 @@
-package gs.or.venator.schedapalestra;
+package gs.or.venator.schedapalestra.core;
 
 import gs.or.venator.schedapalestra.util.Log;
 

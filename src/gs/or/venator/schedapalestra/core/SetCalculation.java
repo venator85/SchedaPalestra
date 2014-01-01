@@ -1,5 +1,8 @@
-package gs.or.venator.schedapalestra;
+package gs.or.venator.schedapalestra.core;
 
+import gs.or.venator.schedapalestra.R;
+import gs.or.venator.schedapalestra.SchedaPalestraApp;
+import gs.or.venator.schedapalestra.R.string;
 import gs.or.venator.schedapalestra.util.Utils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -37,14 +40,14 @@ public class SetCalculation {
 				}
 				resultPerSide /= 2;
 				final String weightPerSide = Utils.formatWeight(resultPerSide);
-				resultTextView.setText(weightPerSide + " × 2");
+				resultTextView.setText(SchedaPalestraApp.getContext().getString(R.string.weight_times_two, weightPerSide));
 				resultTextView.setTag(resultPerSide);
 			} else {
 				resultTextView.setText(weightTotal);
 				resultTextView.setTag(result);
 			}
 		} catch (NumberFormatException e) {
-			resultTextView.setText("N/A");
+			resultTextView.setText(R.string.n_a);
 		}
 	}
 

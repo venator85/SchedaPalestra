@@ -1,5 +1,6 @@
 package gs.or.venator.schedapalestra;
 
+import gs.or.venator.schedapalestra.view.OneRepMaxCalculator;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;

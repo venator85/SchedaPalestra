@@ -7,5 +7,9 @@
 	<string name="too_many_reps">Il numero di ripetizioni deve essere minore o uguale a 20.</string>
 	<string name="massimali_e_carichi_salvati">Massimali e carichi salvati.</string>
 	<string name="inizializzo_scheda_da_assets">Inizializzo scheda da assets</string>
+	<string name="weight_times_two">%s × 2</string>
+	<string name="n_a">N/A</string>
+	<string name="label_onerepmax_when_plainweight">Carico:</string>
+	<string name="scheda_di_carico">Scheda di carico</string>
 
 </resources>
