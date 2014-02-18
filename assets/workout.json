@@ -4,64 +4,134 @@
       "name": "Giorno A",
       "exercises": [
         {
-          "name": "Croci su panca 22°",
+          "name": "Croci panca a 45°",
           "id": "croci",
           "plain_weight": true,
+          "rest": "60-90",
           "sets": [
             {
-              "reps": 10
+              "reps": 8
             },
             {
-              "reps": 10
-            },
-            {
-              "reps": 10
+              "reps": 8
             }
           ]
         },
         {
           "name": "Panca piana",
           "id": "panca-piana",
-          "with_barbell": true,
+          "plain_weight": true,
+          "split_weight": true,
+          "rest": "17",
           "sets": [
             {
-              "reps": 8,
-              "1rmpc": 0.7
+              "reps": -1
             },
             {
-              "reps": 4,
-              "1rmpc": 0.85
+              "reps": -1
             },
             {
-              "reps": 6,
-              "1rmpc": 0.75
+              "reps": -1
             },
             {
-              "reps": 12,
-              "1rmpc": 0.65
-            },
-            {
-              "reps": 10,
-              "1rmpc": 0.65
+              "reps": -1
             }
           ]
         },
         {
-          "name": "Tricipiti French EZ",
-          "id": "french-ez",
-          "with_barbell": true,
+          "name": "Wide chest press",
+          "id": "wide-chest-press",
+          "split_weight": true,
+          "plain_weight": true,
+          "rest": "60-90",
           "sets": [
             {
-              "reps": 10,
-              "1rmpc": 0.7
+              "reps": 12
             },
             {
-              "reps": 6,
-              "1rmpc": 0.8
+              "reps": 12
+            }
+          ]
+        },
+        {
+          "name": "Lat machine",
+          "id": "lat-machine",
+          "plain_weight": true,
+          "rest": "60-90",
+          "sets": [
+            {
+              "reps": 10
             },
             {
-              "reps": 12,
-              "1rmpc": 0.65
+              "reps": 10
+            }
+          ]
+        },
+        {
+          "name": "Leg Press",
+          "id": "leg-press",
+          "plain_weight": true,
+          "rest": "60-90",
+          "sets": [
+            {
+              "reps": 20
+            },
+            {
+              "reps": 20
+            }
+          ]
+        },
+        {
+          "name": "Tricipiti Push down",
+          "id": "push-down",
+          "plain_weight": true,
+          "rest": "17",
+          "sets": [
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            }
+          ]
+        },
+        {
+          "name": "Bicipiti curl con manubrio in piedi",
+          "id": "bicipiti-curl",
+          "plain_weight": true,
+          "rest": "60-90",
+          "sets": [
+            {
+              "reps": 10
+            },
+            {
+              "reps": 10
+            }
+          ]
+        },
+        {
+          "name": "Addominali",
+          "id": "abs",
+          "plain_weight": true,
+          "rest": "60",
+          "sets": [
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
             }
           ]
         }
@@ -73,61 +143,133 @@
       "name": "Giorno B",
       "exercises": [
         {
-          "name": "Leg extension",
-          "id": "leg-extension",
+          "name": "Panca piana",
+          "id": "panca-piana",
           "plain_weight": true,
+          "split_weight": true,
+          "rest": "60-90",
           "sets": [
             {
-              "reps": 12
+              "reps": 10
             },
             {
-              "reps": 12
+              "reps": 10
+            }
+          ]
+        },
+        {
+          "name": "Pulley stretto imp. a triangolo",
+          "id": "pulley-stretto",
+          "plain_weight": true,
+          "rest": "60-90",
+          "sets": [
+            {
+              "reps": 10
             },
             {
-              "reps": 12
+              "reps": 10
+            }
+          ]
+        },
+        {
+          "name": "Lat machine",
+          "id": "lat-machine",
+          "plain_weight": true,
+          "rest": "17",
+          "sets": [
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            }
+          ]
+        },
+        {
+          "name": "Pulley imp. larga",
+          "id": "pulley-largo",
+          "plain_weight": true,
+          "rest": "60-90",
+          "sets": [
+            {
+              "reps": 10
+            },
+            {
+              "reps": 10
             }
           ]
         },
         {
           "name": "Leg Press",
           "id": "leg-press",
-          "with_barbell": false,
+          "plain_weight": true,
+          "rest": "60-90",
           "sets": [
             {
-              "reps": 10,
-              "1rmpc": 0.65
+              "reps": 20
             },
             {
-              "reps": 6,
-              "1rmpc": 0.8
-            },
-            {
-              "reps": 8,
-              "1rmpc": 0.7
-            },
-            {
-              "reps": 12,
-              "1rmpc": 0.65
-            },
-            {
-              "reps": 14,
-              "1rmpc": 0.55
+              "reps": 20
             }
           ]
         },
         {
-          "name": "Spalle alzate a 180°",
-          "id": "alzate-180",
+          "name": "Tricipiti Push down",
+          "id": "push-down",
           "plain_weight": true,
+          "rest": "60-90",
           "sets": [
             {
-              "reps": 15
+              "reps": 12
             },
             {
-              "reps": 15
+              "reps": 12
+            }
+          ]
+        },
+        {
+          "name": "Bicipiti curl con manubrio in piedi",
+          "id": "bicipiti-curl",
+          "plain_weight": true,
+          "rest": "60-90",
+          "sets": [
+            {
+              "reps": -1
             },
             {
-              "reps": 15
+              "reps": -1
+            },
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            }
+          ]
+        },
+        {
+          "name": "Addominali",
+          "id": "abs",
+          "plain_weight": true,
+          "rest": "60",
+          "sets": [
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
             }
           ]
         }
@@ -139,13 +281,60 @@
       "name": "Giorno C",
       "exercises": [
         {
+          "name": "Panca piana",
+          "id": "panca-piana",
+          "plain_weight": true,
+          "split_weight": true,
+          "rest": "60-90",
+          "sets": [
+            {
+              "reps": 10
+            },
+            {
+              "reps": 10
+            }
+          ]
+        },
+        {
           "name": "Lat machine",
           "id": "lat-machine",
           "plain_weight": true,
+          "rest": "17",
           "sets": [
             {
-              "reps": 10
+              "reps": -1
             },
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            }
+          ]
+        },
+        {
+          "name": "Leg Press",
+          "id": "leg-press",
+          "plain_weight": true,
+          "rest": "60-90",
+          "sets": [
+            {
+              "reps": 20
+            },
+            {
+              "reps": 20
+            }
+          ]
+        },
+        {
+          "name": "Affondi",
+          "id": "affondi",
+          "plain_weight": true,
+          "rest": "60-90",
+          "sets": [
             {
               "reps": 10
             },
@@ -155,48 +344,112 @@
           ]
         },
         {
-          "name": "Rowing",
-          "id": "rowing",
-          "split_weight": true,
+          "name": "Affondi laterali",
+          "id": "affondi-laterali",
+          "plain_weight": true,
+          "rest": "60-90",
           "sets": [
             {
-              "reps": 8,
-              "1rmpc": 0.7
+              "reps": 10
             },
             {
-              "reps": 4,
-              "1rmpc": 0.85
-            },
-            {
-              "reps": 6,
-              "1rmpc": 0.75
-            },
-            {
-              "reps": 12,
-              "1rmpc": 0.65
-            },
-            {
-              "reps": 10,
-              "1rmpc": 0.65
+              "reps": 10
             }
           ]
         },
         {
-          "name": "Bicipiti panca inclinata 45° in rotazione",
-          "id": "bicipiti-panca",
-          "with_barbell": false,
+          "name": "Spalle posteriori ai cavi",
+          "id": "rear-deltoid",
+          "plain_weight": true,
+          "rest": "17",
           "sets": [
             {
-              "reps": 10,
-              "1rmpc": 0.7
+              "reps": -1
             },
             {
-              "reps": 6,
-              "1rmpc": 0.8
+              "reps": -1
             },
             {
-              "reps": 12,
-              "1rmpc": 0.65
+              "reps": -1
+            },
+            {
+              "reps": -1
+            }
+          ]
+        },
+        {
+          "name": "Spalle spinte verticali da seduto",
+          "id": "spalle-spinte",
+          "plain_weight": true,
+          "rest": "60-90",
+          "sets": [
+            {
+              "reps": 12
+            },
+            {
+              "reps": 12
+            }
+          ]
+        },
+        {
+          "name": "Spalle alzate frontali da seduto",
+          "id": "spalle-alzate-frontali",
+          "plain_weight": true,
+          "rest": "60-90",
+          "sets": [
+            {
+              "reps": 12
+            },
+            {
+              "reps": 12
+            }
+          ]
+        },
+        {
+          "name": "Tricipiti Push down",
+          "id": "push-down",
+          "plain_weight": true,
+          "rest": "60-90",
+          "sets": [
+            {
+              "reps": 12
+            },
+            {
+              "reps": 12
+            }
+          ]
+        },
+        {
+          "name": "Bicipiti curl con manubrio in piedi",
+          "id": "bicipiti-curl",
+          "plain_weight": true,
+          "rest": "60-90",
+          "sets": [
+            {
+              "reps": 12
+            },
+            {
+              "reps": 12
+            }
+          ]
+        },
+        {
+          "name": "Addominali",
+          "id": "abs",
+          "plain_weight": true,
+          "rest": "60",
+          "sets": [
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
+            },
+            {
+              "reps": -1
             }
           ]
         }

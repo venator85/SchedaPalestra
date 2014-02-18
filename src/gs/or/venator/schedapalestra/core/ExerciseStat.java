@@ -100,6 +100,8 @@ public class ExerciseStat {
 	}
 
 	public JSONObject toJson() throws JSONException {
+		Log.i("Saving id=" + id + ", name=" + name, this);
+
 		JSONObject o = new JSONObject();
 		o.put("id", id);
 		o.put("name", name);

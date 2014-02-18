@@ -23,12 +23,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.view.ViewPager;
@@ -157,6 +159,8 @@ public class MainActivity extends TranslucentActionBarActivity {
 						}
 					});
 
+					final String restPeriod = exercise.optString("rest");
+
 					JSONArray sets = exercise.getJSONArray("sets");
 
 					for (int k = 0; k < sets.length(); k++) {
@@ -169,9 +173,6 @@ public class MainActivity extends TranslucentActionBarActivity {
 
 						JSONObject set = sets.getJSONObject(k);
 
-						int reps = set.getInt("reps");
-						txt_set_reps.setText(String.valueOf(reps));
-
 						double oneRmPc_ = set.optDouble("1rmpc");
 						if (Double.isNaN(oneRmPc_)) {
 							oneRmPc_ = 1.0;
@@ -182,22 +183,41 @@ public class MainActivity extends TranslucentActionBarActivity {
 						}
 						final double oneRmPc = oneRmPc_;
 
-						txt_set_reps.setOnClickListener(new OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								String weight = String.valueOf(txt_set_weight.getTag());
-								CharSequence barbellWeight = withBarbell ? txt_barbell_weight.getText() : null;
-								CharSequence sReps = txt_set_reps.getText();
-								boolean barbellOrSplit = withBarbell | splitWeight;
-								AlertDialog dialog = OneRepMaxCalculationDialog.newInstance(MainActivity.this, exerciseName, sReps, weight, barbellOrSplit, barbellWeight, new OnNewOneRepMaxSet() {
-									@Override
-									public void onNewOneRepMaxSet(double newOneRepMax) {
-										txt_1rm.setText(Utils.doubleToShortString(newOneRepMax));
-									}
-								});
-								dialog.show();
-							}
-						});
+						int reps = set.getInt("reps");
+						if (reps > 0) {
+							txt_set_reps.setText(String.valueOf(reps));
+							txt_set_reps.setOnClickListener(new OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									String weight = String.valueOf(txt_set_weight.getTag());
+									CharSequence barbellWeight = withBarbell ? txt_barbell_weight.getText() : null;
+									CharSequence sReps = txt_set_reps.getText();
+									boolean barbellOrSplit = withBarbell | splitWeight;
+									AlertDialog dialog = OneRepMaxCalculationDialog.newInstance(MainActivity.this, exerciseName, sReps, weight, barbellOrSplit, barbellWeight, new OnNewOneRepMaxSet() {
+										@Override
+										public void onNewOneRepMaxSet(double newOneRepMax) {
+											txt_1rm.setText(Utils.doubleToShortString(newOneRepMax));
+										}
+									});
+									dialog.show();
+								}
+							});
+						} else {
+							txt_set_reps.setText("max");
+							txt_set_reps.setBackgroundResource(0);
+							txt_set_reps.setTextColor(Color.BLACK);
+						}
+
+						final TextView txt_rest = Utils.findView(setView, R.id.txt_rest);
+						final View rest_right_line = Utils.findView(setView, R.id.rest_right_line);
+						if (StringUtils.isNotEmpty(restPeriod)) {
+							txt_rest.setText(restPeriod + " s");
+							txt_rest.setVisibility(View.VISIBLE);
+							rest_right_line.setVisibility(View.VISIBLE);
+						} else {
+							txt_rest.setVisibility(View.GONE);
+							rest_right_line.setVisibility(View.GONE);
+						}
 
 						weights.add(new SetCalculation(txt_1rm, oneRmPc, splitWeight, txt_barbell_weight, txt_set_weight));
 					}
