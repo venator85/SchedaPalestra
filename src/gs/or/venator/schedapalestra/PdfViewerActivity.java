@@ -2,12 +2,11 @@ package gs.or.venator.schedapalestra;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.joanzapata.pdfview.PDFView;
 
-public class PdfViewerActivity extends Activity {
+public class PdfViewerActivity extends TranslucentActionBarActivity {
 
 	public static final String PDF_FILE = "pdf_file";
 	public static final String TITLE = "title";

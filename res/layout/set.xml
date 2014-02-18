@@ -5,15 +5,16 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical" >
 
-    <gs.or.venator.schedapalestra.view.RobotoTextView
+    <gs.or.venator.schedapalestra.view.RobotoButton
         android:id="@+id/txt_set_reps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_default_holo_light"
         android:text="8"
+        style="@style/SmallButtonAppThemeWidgets"
         app:min_width_ems="2"
         android:gravity="center"
         android:textSize="17sp"
+        android:textColor="@android:color/white"
         android:textStyle="bold"
         app:typeface="roboto_bold" />
 

@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
+    <!-- Colori primari: -->
+    <!-- Widgets: 0xff0296c7 -->
+    <!-- ActionBar background: 0xff32526c -->
+    <!-- ActionBar accent: 0xff4076b0 -->
+    
+    <color name="theme_color_widgets">#ff0296c7</color>
+    <color name="theme_color_actionbar_background">#ff32526c</color>
+    <color name="theme_color_actionbar_accent">#ff4076b0</color>
 
-	<color name="light_blue">#ff33b6ea</color>
-	<color name="light_blue_backg">#4b33b6ea</color>
-	
-	<color name="yellow">#ff99cc00</color>
-	<color name="red">#ffff4444</color>
+	<color name="light_blue">#ff0296c7</color>
+	<color name="light_blue_backg">#4b0296c7</color>
 	
 	<color name="light_grey">#ffcccccc</color>
 

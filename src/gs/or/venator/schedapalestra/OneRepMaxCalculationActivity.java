@@ -1,10 +1,9 @@
 package gs.or.venator.schedapalestra;
 
 import gs.or.venator.schedapalestra.view.OneRepMaxCalculator;
-import android.app.Activity;
 import android.os.Bundle;
 
-public class OneRepMaxCalculationActivity extends Activity {
+public class OneRepMaxCalculationActivity extends TranslucentActionBarActivity {
 
 	private OneRepMaxCalculator oneRepMaxCalculator;
 

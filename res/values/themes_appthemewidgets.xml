@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="AppThemeWidgets" parent="@style/_AppThemeWidgets"/>
+
+  <style name="_AppThemeWidgets" parent="Theme.Appthemeactionbar">
+
+    <item name="android:editTextBackground">@drawable/appthemewidgets_edit_text_holo_light</item>
+
+    <item name="android:textColorHighlight">#990296c7</item>
+    <item name="android:textSelectHandleLeft">@drawable/appthemewidgets_text_select_handle_left</item>
+    <item name="android:textSelectHandleRight">@drawable/appthemewidgets_text_select_handle_right</item>
+    <item name="android:textSelectHandle">@drawable/appthemewidgets_text_select_handle_middle</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewAppThemeWidgets</item>
+
+    <item name="android:listChoiceIndicatorMultiple">@drawable/appthemewidgets_btn_check_holo_light</item>
+
+    <item name="android:listChoiceIndicatorSingle">@drawable/appthemewidgets_btn_radio_holo_light</item>
+
+    <item name="android:buttonStyle">@style/ButtonAppThemeWidgets</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonAppThemeWidgets</item>
+
+    <item name="android:dropDownSpinnerStyle">@style/SpinnerAppThemeWidgets</item>
+
+    <item name="android:listChoiceBackgroundIndicator">@drawable/appthemewidgets_list_selector_holo_light</item>
+
+    <item name="android:activatedBackgroundIndicator">@drawable/appthemewidgets_activated_background_holo_light</item>
+
+  </style>
+
+</resources>

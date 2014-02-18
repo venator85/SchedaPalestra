@@ -26,7 +26,6 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -43,7 +42,7 @@ import android.widget.Toast;
 
 import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
 
-public class MainActivity extends Activity {
+public class MainActivity extends TranslucentActionBarActivity {
 
 	private static final String WORKOUT_JSON = "workout.json";
 	private static final String WORKOUT_STATS_JSON = "workout_stats.json";
